@@ -1,15 +1,24 @@
 import React, {useEffect, useState} from 'react'
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, ImageBackground } from 'react-native';
 import Card from './src/components/card'
 
-const cards = [
+/*const cards = [
    "😁",
    "👻",
    "🙈",
    "🐺",
    "💀",
    "❤️"
+]
+*/
+const cards = [
+  require("./assets/miles.jpeg"),
+  require("./assets/scarlet-spider.jpeg"),
+  require("./assets/spider-gwen.png"),
+  require("./assets/spider-indu.jpeg"),
+  require("./assets/spiderman2099.jpeg"),
+  require("./assets/spiderpunk.jpeg"),
 ]
 
 export default function App() {
@@ -45,6 +54,7 @@ export default function App() {
 
 
   return (
+      <ImageBackground source={require("./assets/fondo2.jpeg")} style={styles.fondo}>
     <View style={styles.container}>
       <Text style={styles.title}>{didPlayerWin() ? "🎉Congratulations🎉 " : "Memory Game"}</Text>
       <Text style={styles.title}>Score: {score}</Text>
@@ -55,6 +65,7 @@ export default function App() {
             <Card 
             key={index}
             isTurnedOver={isTurnedOver}
+            image={card}
             onPress={() => handleTapCard(index)}
             >{card}
             </Card>
@@ -64,15 +75,18 @@ export default function App() {
       {didPlayerWin() && <Button onPress={resetGame} title='reset'/>}
       <StatusBar style="light" />
     </View>
+      </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#071160',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  fondo:{
+    flex:1
   },
   title: {
     fontSize:32,
